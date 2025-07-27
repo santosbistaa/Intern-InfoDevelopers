@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Switch</title>
+</head>
+<body>
+<h1>Switch Case</h1>
+<div th:switch="${user.gender}">
+    <p th:case="'Male'">Gender: Male</p>
+    <p th:case="Female">Gender: Female</p>
+    <p th:case="*">Gender: Others</p>
+
+</div>
+
+</body>
+</html>

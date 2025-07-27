@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration Form</title>
+
+
+</head>
+<body>
+<div align="center">
+    <div style="border-style:solid; width:500px">
+        <h1>Player Registration Form</h1>
+        <form
+                role="form"
+                method="post"
+                th:action="@{/register/save}"
+                th:object="${playerForm}"
+        >
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+            <br/>
+
+            <label>Position</label>
+            <select th:field="*{position}">
+                <option th:each=" p : ${positionList}" th:value="${p}" th:text="${p}"></option>
+            </select>
+            <br/>
+
+            <label>Age</label>
+            <input type="text" th:field="*{age}"/>
+            <br/>
+
+            <label>Strong Leg</label>
+            <input type="radio" th:field="*{strongLeg}" th:value="Right"/>Right
+            <input type="radio" th:value="Left"/>Left
+            <br/>
+
+            <label>Club</label>
+            <textarea rows="5" cols="25" th:field="*{club}"></textarea>
+            <br/>
+
+            <button type="submit">Register</button>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iterations in Thymeleaf</title>
+</head>
+<body>
+<h1>Players Details</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>S.N</th>
+    <th>Index</th>
+    <th>Even</th>
+    <th>Odd</th>
+    <th>First</th>
+    <th>Last</th>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Salary</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="player,playStat : ${players}">
+    <td th:text="${playStat.count}"></td>
+    <td th:text="${playStat.index}"></td>
+    <td th:text="${playStat.even}"></td>
+    <td th:text="${playStat.odd}"></td>
+    <td th:text="${playStat.first}"></td>
+    <td th:text="${playStat.last}"></td>
+    <td th:text="${player.name}"></td>
+    <td th:text="${player.position}"></td>
+    <td th:text="${player.age}"></td>
+    <td th:text="${player.salary}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

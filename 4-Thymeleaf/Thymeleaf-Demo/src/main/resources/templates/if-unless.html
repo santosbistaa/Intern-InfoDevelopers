@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>If-Unless</title>
+</head>
+<body>
+<h1>If Unless</h1>
+<table border="1">
+  <thead>
+  <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Gender</th>
+      <th>Access</th>
+  </tr>
+  </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.role}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:if="${user.role} == 'IT'">Granted</td>
+        <td th:unless="${user.role} == 'IT'">Not Granted</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

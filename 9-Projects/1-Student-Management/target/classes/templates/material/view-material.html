@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Material</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4" >
+    <h1>Materials for Course ID: <span th:text="${courseId}"></span></h1>
+
+    <div th:if="${materials.isEmpty()}" class="alert alert-info">
+        No materials found for this course.
+    </div>
+
+    <div th:each="material : ${materials}" class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${material.title}">Title</h5>
+            <p class="card-text" th:text="${material.description}">Description</p>
+
+            <div class="mb-3">
+                <iframe th:src="@{'/uploads/' + ${material.filePath}}"
+                        width="100%" height="400px">
+                </iframe>
+            </div>
+            <a class="btn btn-success"
+               th:href="@{'/materials/download/' + ${material.filePath}}">Download
+            </a>
+        </div>
+    </div>
+    <a th:href="@{/dashboard}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+</body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <h2>Student Dashboard</h2>
+  <ul class="list-group mt-3">
+    <li class="list-group-item"><a href="/courses">Enrolled Courses</a></li>
+<!--    <li class="list-group-item"><a href="/materials/view/course/{courseId}">View Materials</a></li>-->
+      <li class="list-group-item" th:each="course : ${enrolledCourses}">
+          <a th:href="@{'/materials/view/course/' + ${course.id}}">
+              View Materials for <span th:text="${course.title}"></span>
+          </a>
+      </li>
+
+      <li class="list-group-item"><a href="/assignments/submit">Submit Assignment</a></li>
+  </ul>
+</div>
+</body>
+</html>

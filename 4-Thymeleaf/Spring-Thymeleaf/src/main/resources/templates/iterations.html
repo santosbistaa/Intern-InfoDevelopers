@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iterations</title>
+</head>
+<body>
+<div>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Club</th>
+    <th>Legend</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="player: ${players}">
+    <td th:text="${player.name}"></td>
+    <td th:text="${player.position}"></td>
+    <td th:text="${player.age}"></td>
+    <td th:text="${player.club}"></td>
+    <td th:if="${player.club}=='Barcelona'">Yes</td>
+    <td th:unless="${player.club}=='Barcelona'">No</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div  th:each="player : ${players}" th:switch="${player.position}">
+  <p th:case="'CMF'">MidFielders</p>
+  <p th:case="*">Others</p>
+</div>
+</body>
+</html>

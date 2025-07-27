@@ -1,0 +1,85 @@
+services:
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: microservices
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  registry-service:
+    build: ./RegistryService
+    container_name: registry-service
+    ports:
+      - "8761:8761"
+    networks:
+      - backend
+
+  quiz-service:
+    build: ./QuizService
+    container_name: quiz-service
+    depends_on:
+      - registry-service
+      - postgres
+    ports:
+      - "8081:8081"
+    environment:
+      
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/microservices
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka/
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://registry-service:8761/eureka/
+      
+
+    networks:
+      - backend
+
+  question-service:
+    build: ./QuestionService
+    container_name: question-service
+    depends_on:
+      - registry-service
+      - postgres
+    ports:
+      - "9092:9092"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/microservices
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka/
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://registry-service:8761/eureka/
+    networks:
+      - backend
+
+  api-gateway:
+    build: ./APIGateway
+    container_name: api-gateway
+    depends_on:
+      - quiz-service
+      - question-service
+      - registry-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registry-service:8761/eureka/
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://registry-service:8761/eureka/
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pgdata:

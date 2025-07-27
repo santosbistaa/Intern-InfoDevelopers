@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Assignment Submissions</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Submissions for Assignment: <span th:text="${assignment.title}">Assignment Title</span></h2>
+
+  <table class="table table-bordered mt-4">
+    <thead class="thead-light">
+    <tr>
+      <th>Student</th>
+      <th>Submitted At</th>
+      <th>File</th>
+      <th>Grade</th>
+      <th>Feedback</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="submission : ${submissions}">
+      <td th:text="${submission.student.name}">Student Name</td>
+      <td th:text="${#temporals.format(submission.submittedAt, 'yyyy-MM-dd HH:mm')}">Date</td>
+      <td>
+        <a class="btn btn-sm btn-info"
+           th:href="@{'/assignments/download/' + ${submission.filePath}}"
+           target="_blank">Download</a>
+      </td>
+      <td th:text="${submission.grade != null ? submission.grade : 'N/A'}"></td>
+      <td th:text="${submission.feedback != null ? submission.feedback : 'N/A'}"></td>
+      <td>
+        <a th:href="@{'/assignments/grade/' + ${submission.id}}" class="btn btn-sm btn-success">Grade</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href="@{/dashboard}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Switch</title>
+</head>
+<body>
+<h1>Switch Case</h1>
+<h1 th:text="${player.name}"></h1>
+<div th:switch="${player.position}">
+  <p th:case="'LWF'">He can dribble</p>
+  <p th:case="*">He cannot dribble</p>
+</div>
+</body>
+</html>

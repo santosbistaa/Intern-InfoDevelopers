@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>View All Courses</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course: ${courses}">
+            <td th:text="${course.title}"></td>
+            <td th:text="${course.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

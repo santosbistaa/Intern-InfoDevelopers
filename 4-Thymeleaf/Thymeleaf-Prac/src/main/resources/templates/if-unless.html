@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>If-Unless</title>
+</head>
+<body>
+<h1>If-Unless</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Salary</th>
+    <th>Catch</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="player : ${players}">
+    <td th:text="${player.name}"></td>
+    <td th:text="${player.position}"></td>
+    <td th:text="${player.age}"></td>
+    <td th:text="${player.salary}"></td>
+    <td th:if="${player.position} == 'GK'">Yes</td>
+    <td th:unless="${player.position} == 'GK'">No</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

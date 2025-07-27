@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Selection Expression</title>
+</head>
+<body>
+<h1>Selection Expression</h1>
+<h2>User Details</h2>
+<div th:object="${players}">
+  <p>Name:<strong th:text="*{name}"></strong></p>
+  <p>Position:<strong th:text="*{position}"></strong></p>
+  <p>Age:<strong th:text="*{age}"></strong></p>
+  <p>Salary:<strong th:text="*{salary}"></strong></p>
+</div>
+
+</body>
+</html>
